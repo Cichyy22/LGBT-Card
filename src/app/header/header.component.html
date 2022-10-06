@@ -1,0 +1,57 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a routerLink="/" class="navbar-brand">LGBT Card</a>
+    </div>
+    <div class="collapse navbar-collapse" style="text-align: center;">
+      <ul class="nav navbar-nav">
+        <li routerLinkActive="active"><a routerLink="/pronouce" >Pronouce</a></li>
+        <li routerLinkActive="active"><a routerLink="/sliders" >Sliders</a></li>
+        <li routerLinkActive="active"><a routerLink="/links" >Links</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="isAuth">
+          <a style="cursor: pointer;" *ngIf="isAuth">Logout</a>
+        </li>
+        <li *ngIf="isAuth">
+          <a style="cursor: pointer;" *ngIf="isAuth" routerLink="/edit">Edit</a>
+        </li>
+        <li class="dropdown" appDropdown *ngIf="!isAuth">
+          <a style="cursor: pointer;" class="dropdown-toggle" role="button">Auth<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li style="cursor: pointer;">Login</li>
+            <li style="cursor: pointer;">Register</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a routerLink="/" class="navbar-brand">Recipe Book</a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li routerLinkActive="active" *ngIf="isAuth"><a routerLink="/recipes" >Recipes</a></li>
+        <li routerLinkActive="active" *ngIf="!isAuth"><a routerLink="/auth">Authenticate</a></li>
+        <li routerLinkActive="active"><a routerLink="/shopping-list">Shopping List</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="isAuth">
+          <a style="cursor: pointer;" >Logout</a>
+        </li>
+        <li class="dropdown" appDropdown *ngIf="isAuth">
+          <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a style="cursor: pointer;" >Save Data</a></li>
+            <li><a style="cursor: pointer;" >Fetch Data</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav> -->

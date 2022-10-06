@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div
+         id="user-data"
+         ngModelGroup="userData"
+         #userData="ngModelGroup">
+          <div class="form-group">
+            <label for="message">Your message</label>
+            <input
+              type="text"
+              id="message"
+              class="form-control"
+              ngModel
+              name="message"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label for="names">Names</label>
+            <input
+             type="text"
+              id="names"
+               class="form-control"
+               ngModel
+               name="names"
+               required>
+               <button class="btn btn-default" type="button"
+          (click)="addName()">Add name</button>
+          </div>
+          <ul *ngFor="let n of user.names; let i = index">
+            <li>{{n}} <button class="btn btn-default" type="button" (click)="removeName(i)">X</button></li>
+          </ul>
+
+          <div class="form-group">
+            <label for="pronouns">Pronouns (e.g. he/him)</label>
+            <input
+             type="text"
+              id="pronouns"
+               class="form-control"
+               ngModel
+               name="pronouns"
+               required>
+               <button class="btn btn-default" type="button"
+          (click)="addPronouns()">Add pronouns</button>
+          </div>
+          <ul *ngFor="let n of user.pronouns; let i = index">
+            <li>{{n}} <button class="btn btn-default" type="button" (click)="removePronouns(i)">X</button></li>
+          </ul>
+
+          <div class="form-group">
+            <label for="flags">Flags</label>
+            <input
+             type="text"
+              id="flags"
+               class="form-control"
+               ngModel
+               name="flags"
+               required>
+               <button class="btn btn-default" type="button"
+          (click)="addFlags()">Add flags</button>
+          </div>
+          <ul *ngFor="let n of user.flags; let i = index">
+            <li>{{n}} <button class="btn btn-default" type="button" (click)="removeFlags(i)">X</button></li>
+          </ul>
+
+          <div class="form-group">
+            <label for="link">Links</label>
+            <input
+             type="text"
+             placeholder="name e.g. Facebook"
+              id="link_name"
+               class="form-control"
+               ngModel
+               name="link_name"
+               required>
+            <input
+             type="text"
+             placeholder="url e.g. https://www.facebook.com/"
+              id="link_url"
+               class="form-control"
+               ngModel
+               name="link_url"
+               required>
+               <button class="btn btn-default" type="button"
+          (click)="addLinks()">Add link</button>
+          </div>
+          <ul *ngFor="let n of user.links; let i = index">
+            <li><a href={{n.url}} target="_blank">{{n.name}}</a> <button class="btn btn-default" type="button" (click)="removeLinks(i)">X</button></li>
+          </ul>
+          <div class="form-group">
+            <label for="words">Words</label>
+            <input
+             type="text"
+             placeholder="new word"
+              id="word"
+               class="form-control"
+               ngModel
+               name="word"
+               required>
+               <button class="btn btn-default" type="button"
+          (click)="addWords()">Add word</button>
+          <div class="row">
+            <div class="col-xs-3">
+              <dl *ngFor="let w1 of words_col_1;">
+                <button  (click)="onClick()" [ngStyle]="{backgroundColor: clicked  ? 'Aquamarine' : 'transparent'}"><dd>{{w1}}</dd></button>
+              </dl>
+            </div>
+
+
+            <div class="col-xs-3">
+              <dl *ngFor="let w2 of words_col_2;">
+                <button  (click)="onClick()" [ngStyle]="{backgroundColor: clicked  ? 'Aquamarine' : 'transparent'}"><dd>{{w2}}</dd></button>
+              </dl>
+            </div>
+
+
+              <div class="col-xs-3">
+                <dl *ngFor="let w3 of words_col_3; ; let i = index">
+                  <button (click)="onClick()" [ngStyle]="{backgroundColor: clicked  ? 'Aquamarine' : 'transparent'}"
+                  ><dd>{{w3}}</dd></button>
+                </dl>
+              </div>
+              <div class="col-xs-3">
+                <dl *ngFor="let w4 of words_col_4; ; let i = index">
+                  <button (click)="onClick()" [ngStyle]="{backgroundColor: clicked  ? 'Aquamarine' : 'transparent'}"
+                  ><dd>{{w4}}</dd></button>
+                </dl>
+              </div>
+          </div>
+        </div>
+        </div>
+        <button
+        class="btn btn-primary"
+         type="submit"
+         [disabled]="!f.valid">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
