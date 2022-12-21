@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PronouceListComponent implements OnInit {
    pronouces_good= ['he/him', 'she/her']
-   recipes_neutral=['they/them']
+   pronouces_neutral=['they/them']
   constructor() { }
 
   ngOnInit(): void {

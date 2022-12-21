@@ -1,140 +1,201 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form (ngSubmit)="onSubmit()" #f="ngForm">
-        <div
-         id="user-data"
-         ngModelGroup="userData"
-         #userData="ngModelGroup">
+      <form [formGroup]="signForm" (ngSubmit)="onSubmit()">
+        <div>
           <div class="form-group">
             <label for="message">Your message</label>
-            <input
-              type="text"
-              id="message"
-              class="form-control"
-              ngModel
-              name="message"
-              required>
+            <input type="text" id="message" class="form-control" formControlName="message">
+            <span *ngIf="!signForm.get('message').valid && signForm.get('message').touched" class="help-block">Empty</span>
           </div>
 
           <div class="form-group">
             <label for="names">Names</label>
-            <input
-             type="text"
-              id="names"
-               class="form-control"
-               ngModel
-               name="names"
-               required>
-               <button class="btn btn-default" type="button"
-          (click)="addName()">Add name</button>
+            <button type ='button' class="btn btn-default" (click)="addName()">Add</button>
+            <ng-container formArrayName="name">
+              <div *ngFor="let _ of name.controls; index as i">
+                <input formControlName="name" [formControlName]="i" />
+                <button (click)="removeName(i)">X</button>
+              </div>
+            </ng-container>
           </div>
-          <ul *ngFor="let n of user.names; let i = index">
-            <li>{{n}} <button class="btn btn-default" type="button" (click)="removeName(i)">X</button></li>
-          </ul>
 
           <div class="form-group">
-            <label for="pronouns">Pronouns (e.g. he/him)</label>
-            <input
-             type="text"
-              id="pronouns"
-               class="form-control"
-               ngModel
-               name="pronouns"
-               required>
-               <button class="btn btn-default" type="button"
-          (click)="addPronouns()">Add pronouns</button>
+            <label for="pronouns">Pronouns prefered (e.g. he/him)</label>
+            <button type ='button' class="btn btn-default" (click)="addPronouns()">Add</button>
+            <ng-container formArrayName="pronouns">
+              <div *ngFor="let _ of pronouns.controls; index as i">
+                <input formControlName="pronouns" [formControlName]="i" />
+                <button (click)="removePronouns(i)">X</button>
+              </div>
+            </ng-container>
           </div>
-          <ul *ngFor="let n of user.pronouns; let i = index">
-            <li>{{n}} <button class="btn btn-default" type="button" (click)="removePronouns(i)">X</button></li>
-          </ul>
+          <div class="form-group">
+            <label for="pronouns_neutral">Pronouns neutral (e.g. he/him)</label>
+            <button type ='button' class="btn btn-default" (click)="addPronounsN()">Add</button>
+            <ng-container formArrayName="pronouns_neutral">
+              <div *ngFor="let _ of pronouns_neutral.controls; index as i">
+                <input formControlName="pronouns_neutral" [formControlName]="i" />
+                <button (click)="removePronounsN(i)">X</button>
+              </div>
+            </ng-container>
+          </div>
 
           <div class="form-group">
             <label for="flags">Flags</label>
-            <input
-             type="text"
-              id="flags"
-               class="form-control"
-               ngModel
-               name="flags"
-               required>
-               <button class="btn btn-default" type="button"
-          (click)="addFlags()">Add flags</button>
+            <button type ='button' class="btn btn-default" (click)="addSexuality()">Add</button>
+            <ng-container formArrayName="sexuality">
+              <div *ngFor="let _ of sexuality.controls; index as i">
+                <input formControlName="sexuality" [formControlName]="i" />
+                <button (click)="removeSexuality(i)">X</button>
+              </div>
+            </ng-container>
           </div>
-          <ul *ngFor="let n of user.flags; let i = index">
-            <li>{{n}} <button class="btn btn-default" type="button" (click)="removeFlags(i)">X</button></li>
-          </ul>
 
           <div class="form-group">
             <label for="link">Links</label>
-            <input
-             type="text"
-             placeholder="name e.g. Facebook"
-              id="link_name"
-               class="form-control"
-               ngModel
-               name="link_name"
-               required>
-            <input
-             type="text"
-             placeholder="url e.g. https://www.facebook.com/"
-              id="link_url"
-               class="form-control"
-               ngModel
-               name="link_url"
-               required>
-               <button class="btn btn-default" type="button"
-          (click)="addLinks()">Add link</button>
+            <button class="btn btn-default" type="button" (click)="addLinks()">Add link</button>
+            <ng-container formArrayName="links">
+              <div *ngFor="let _ of links.controls; index as i">
+                <ng-container [formGroupName]="i">
+                  <input formControlName="social" />
+                  <input formControlName="url" />
+                </ng-container>
+                <button (click)="removeLinks(i)">X</button>
+              </div>
+            </ng-container>
           </div>
-          <ul *ngFor="let n of user.links; let i = index">
-            <li><a href={{n.url}} target="_blank">{{n.name}}</a> <button class="btn btn-default" type="button" (click)="removeLinks(i)">X</button></li>
-          </ul>
+
           <div class="form-group">
-            <label for="words">Words</label>
-            <input
-             type="text"
-             placeholder="new word"
-              id="word"
-               class="form-control"
-               ngModel
-               name="word"
-               required>
-               <button class="btn btn-default" type="button"
-          (click)="addWords()">Add word</button>
+            <label for="words">Words</label><br>
+            <input type="text" [(ngModel)]="word" [ngModelOptions]="{standalone: true}">
+            <button class="btn btn-default" type="button" (click)="addWord(word)">Add word</button>
+
           <div class="row">
             <div class="col-xs-3">
               <dl *ngFor="let w1 of words_col_1;">
-                <button  (click)="onClick()" [ngStyle]="{backgroundColor: clicked  ? 'Aquamarine' : 'transparent'}"><dd>{{w1}}</dd></button>
+                <input type="checkbox" formArrayName="selectedWords" name="{{w1}}" value="{{w1}}" (change)="onCheckboxChange($event)">
+                <label for="{{w1}}">{{w1}}</label>
               </dl>
             </div>
 
 
             <div class="col-xs-3">
               <dl *ngFor="let w2 of words_col_2;">
-                <button  (click)="onClick()" [ngStyle]="{backgroundColor: clicked  ? 'Aquamarine' : 'transparent'}"><dd>{{w2}}</dd></button>
+                <input type="checkbox" formArrayName="selectedWords" name="{{w2}}" value="{{w2}}" (change)="onCheckboxChange($event)">
+                <label for="{{w2}}">{{w2}}</label>
               </dl>
             </div>
 
 
               <div class="col-xs-3">
                 <dl *ngFor="let w3 of words_col_3; ; let i = index">
-                  <button (click)="onClick()" [ngStyle]="{backgroundColor: clicked  ? 'Aquamarine' : 'transparent'}"
-                  ><dd>{{w3}}</dd></button>
+                  <input type="checkbox" formArrayName="selectedWords" name="{{w3}}" value="{{w3}}" (change)="onCheckboxChange($event)">
+                <label for="{{w3}}">{{w3}}</label>
                 </dl>
               </div>
               <div class="col-xs-3">
                 <dl *ngFor="let w4 of words_col_4; ; let i = index">
-                  <button (click)="onClick()" [ngStyle]="{backgroundColor: clicked  ? 'Aquamarine' : 'transparent'}"
-                  ><dd>{{w4}}</dd></button>
+                  <input type="checkbox" formArrayName="selectedWords" name="{{w4}}" value="{{w4}}" (change)="onCheckboxChange($event)">
+                <label for="{{w4}}">{{w4}}</label>
                 </dl>
               </div>
           </div>
         </div>
+
+
+          <div class="form-group">
+            <label for="link">Sliders</label>
+
+
+            <div style="margin-left: 50px;">
+              <ul>
+              <li>
+                <h3>Identity</h3>
+                <div>
+                  <input type="range" min="0" max="10" value="7" step="0" class="form-control" formControlName="s_identity"/>
+                </div>
+                <div class="dd">
+                  <span>Male</span>
+                  <span>Non-binary</span>
+                  <span>Female</span>
+                </div>
+              </li>
+              <li>
+                <h3>Expression</h3>
+                <div>
+                  <input type="range" min="0" max="10" value="7" step="0" class="form-control" formControlName="s_expression"/>
+                </div>
+                <div class="dd">
+                  <span>Hypermasculine</span>
+                  <span>Androgynous</span>
+                  <span>Hyperfeminine</span>
+                </div>
+              </li>
+              <li>
+                <h3>Orientation</h3>
+                <div>
+                  <input type="range" min="0" max="10" value="7" step="0" class="form-control" formControlName="s_orientation"/>
+                </div>
+                <div class="dd">
+                  <span>Straight</span>
+                  <span>Bi/Pan</span>
+                  <span>Gay</span>
+                </div>
+              </li>
+              <li>
+                <h3>Sexual drive</h3>
+                <div>
+                  <input type="range" min="0" max="10" value="7" step="0"  class="form-control" formControlName="s_drive"/>
+                </div>
+                <div class="dd">
+                  <span>Asexual</span>
+                  <span>Regular</span>
+                  <span>Hypersexual</span>
+                </div>
+              </li>
+              <li>
+                <h3>Romantic desire</h3>
+                <div>
+                  <input type="range" min="0" max="10" value="7" step="0" class="form-control" formControlName="s_desire"/>
+                </div>
+                <div class="dd">
+                  <span>Aromantic</span>
+                  <span>Interested</span>
+                  <span>Hopeless romantic</span>
+                </div>
+              </li>
+              <li>
+                <h3>Relationship attitude</h3>
+                <div>
+                  <input type="range" min="0" max="10" value="7" step="0" class="form-control" formControlName="s_attitude"/>
+                </div>
+                <div class="dd">
+                  <span>Monogamous</span>
+                  <span>Open</span>
+                  <span>Polyamorous</span>
+                </div>
+              </li>
+              <li>
+                <h3>Sexual exploration</h3>
+                <div>
+                  <input type="range" min="0" max="10" value="7" step="0" class="form-control" formControlName="s_exploration" />
+                </div>
+                <div class="dd">
+                  <span>Vanilla</span>
+                  <span>Light play</span>
+                  <span>Hard BDSM</span>
+                </div>
+              </li>
+              </ul>
+              </div>
+          </div>
         </div>
+
         <button
         class="btn btn-primary"
          type="submit"
-         [disabled]="!f.valid">Submit</button>
+         >Submit</button>
       </form>
     </div>
   </div>

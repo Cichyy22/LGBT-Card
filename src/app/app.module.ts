@@ -14,7 +14,7 @@ import { PronouceSexualityComponent } from './pronouce/pronouce-sexuality/pronou
 import { AuthComponent } from './auth/auth.component';
 import { PronouceNamesComponent } from './pronouce/pronouce-names/pronouce-names.component';
 import { EditComponent } from './edit/edit.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
