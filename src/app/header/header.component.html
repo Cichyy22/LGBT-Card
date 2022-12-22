@@ -19,8 +19,8 @@
         <li class="dropdown" appDropdown *ngIf="!isAuth">
           <a style="cursor: pointer;" class="dropdown-toggle" role="button">Auth<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li style="cursor: pointer;">Login</li>
-            <li style="cursor: pointer;">Register</li>
+            <li style="cursor: pointer;"><a routerLink="/auth" >Login</a></li>
+            <li style="cursor: pointer;"><a routerLink="/auth/register" >Register</a></li>
           </ul>
         </li>
       </ul>
