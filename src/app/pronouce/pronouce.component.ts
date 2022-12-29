@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PronouceService } from './pronouce.service';
 
 @Component({
   selector: 'app-pronouce',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pronouce.component.css']
 })
 export class PronouceComponent implements OnInit {
-  your_mess = 'Hellow Adventer';
+  message = 'Hellow Adventer';
   constructor() { }
 
   ngOnInit(): void {

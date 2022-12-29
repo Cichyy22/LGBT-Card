@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -15,8 +16,9 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
   }
-  onSubmit(){
-    console.log("działa")
+  onSubmit(form: NgForm){
+    console.log(form.value)
+    form.reset()
   }
 
 }

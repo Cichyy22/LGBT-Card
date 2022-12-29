@@ -12,30 +12,30 @@
           <div class="form-group">
             <label for="names">Names</label>
             <button type ='button' class="btn btn-default" (click)="addName()">Add</button>
-            <ng-container formArrayName="name">
-              <div *ngFor="let _ of name.controls; index as i">
-                <input formControlName="name" [formControlName]="i" />
+            <ng-container formArrayName="names">
+              <div *ngFor="let _ of names.controls; index as i">
+                <input formControlName="names" [formControlName]="i" />
                 <button (click)="removeName(i)">X</button>
               </div>
             </ng-container>
           </div>
 
           <div class="form-group">
-            <label for="pronouns">Pronouns prefered (e.g. he/him)</label>
+            <label for="pronouces_good">Pronouns prefered (e.g. he/him)</label>
             <button type ='button' class="btn btn-default" (click)="addPronouns()">Add</button>
-            <ng-container formArrayName="pronouns">
-              <div *ngFor="let _ of pronouns.controls; index as i">
-                <input formControlName="pronouns" [formControlName]="i" />
+            <ng-container formArrayName="pronouces_good">
+              <div *ngFor="let _ of pronouces_good.controls; index as i">
+                <input formControlName="pronouces_good" [formControlName]="i" />
                 <button (click)="removePronouns(i)">X</button>
               </div>
             </ng-container>
           </div>
           <div class="form-group">
-            <label for="pronouns_neutral">Pronouns neutral (e.g. he/him)</label>
+            <label for="pronouces_neutral">Pronouns neutral (e.g. he/him)</label>
             <button type ='button' class="btn btn-default" (click)="addPronounsN()">Add</button>
-            <ng-container formArrayName="pronouns_neutral">
-              <div *ngFor="let _ of pronouns_neutral.controls; index as i">
-                <input formControlName="pronouns_neutral" [formControlName]="i" />
+            <ng-container formArrayName="pronouces_neutral">
+              <div *ngFor="let _ of pronouces_neutral.controls; index as i">
+                <input formControlName="pronouces_neutral" [formControlName]="i" />
                 <button (click)="removePronounsN(i)">X</button>
               </div>
             </ng-container>
@@ -74,7 +74,7 @@
           <div class="row">
             <div class="col-xs-3">
               <dl *ngFor="let w1 of words_col_1;">
-                <input type="checkbox" formArrayName="selectedWords" name="{{w1}}" value="{{w1}}" (change)="onCheckboxChange($event)">
+                <input type="checkbox" formArrayName="selectedWords1" name="{{w1}}" value="{{w1}}" (change)="onCheckboxChange1($event)">
                 <label for="{{w1}}">{{w1}}</label>
               </dl>
             </div>
@@ -82,7 +82,7 @@
 
             <div class="col-xs-3">
               <dl *ngFor="let w2 of words_col_2;">
-                <input type="checkbox" formArrayName="selectedWords" name="{{w2}}" value="{{w2}}" (change)="onCheckboxChange($event)">
+                <input type="checkbox" formArrayName="selectedWords2" name="{{w2}}" value="{{w2}}" (change)="onCheckboxChange2($event)">
                 <label for="{{w2}}">{{w2}}</label>
               </dl>
             </div>
@@ -90,13 +90,13 @@
 
               <div class="col-xs-3">
                 <dl *ngFor="let w3 of words_col_3; ; let i = index">
-                  <input type="checkbox" formArrayName="selectedWords" name="{{w3}}" value="{{w3}}" (change)="onCheckboxChange($event)">
+                  <input type="checkbox" formArrayName="selectedWords3" name="{{w3}}" value="{{w3}}" (change)="onCheckboxChange3($event)">
                 <label for="{{w3}}">{{w3}}</label>
                 </dl>
               </div>
               <div class="col-xs-3">
                 <dl *ngFor="let w4 of words_col_4; ; let i = index">
-                  <input type="checkbox" formArrayName="selectedWords" name="{{w4}}" value="{{w4}}" (change)="onCheckboxChange($event)">
+                  <input type="checkbox" formArrayName="selectedWords4" name="{{w4}}" value="{{w4}}" (change)="onCheckboxChange4($event)">
                 <label for="{{w4}}">{{w4}}</label>
                 </dl>
               </div>
@@ -195,6 +195,7 @@
         <button
         class="btn btn-primary"
          type="submit"
+         [disabled]="!signForm.valid"
          >Submit</button>
       </form>
     </div>

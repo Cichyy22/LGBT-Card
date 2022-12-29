@@ -15,6 +15,7 @@ import { AuthComponent } from './auth/auth.component';
 import { PronouceNamesComponent } from './pronouce/pronouce-names/pronouce-names.component';
 import { EditComponent } from './edit/edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PronouceService } from './pronouce/pronouce.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [PronouceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
